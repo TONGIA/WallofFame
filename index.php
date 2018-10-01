@@ -1003,7 +1003,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                     <div class="row">
                         <div class="col-lg-3 footer-grid1-wthree-agileits text-left">
                             <h3 class="mb-4">About Us</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            <p>Bunch of engineers trying to do something productive! </p>
                             <a href="#contact" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm animated-button gibson-three mt-3">GetInTouch</a>
                         </div>
                         <div class="col-lg-3 footer-grid1-wthree-agileits text-left">
@@ -1018,67 +1018,14 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                                     <a href=""> akshattongia48@gmail.com</a>
                                 </li>
                                 <li>
-                                    <span class="fas fa-phone"></span> +91 790726  </li>
+                                    <span class="fas fa-phone"></span> +91 8209790726  </li>
                                 <li>
                                     <span class="fas fa-fax"></span> +91 8808579891 </li>
 
 
                             </ul>
                         </div>
-                        <!-- <div class="col-lg-3 footer-grid text-left">
-                            <div class="tech-btm">
-                                <h3 class="mb-4">Latest Photos</h3>
-                                <div class="blog-grids row mb-3">
-                                    <div class="col-md-4 pr-0 blog-grid-left">
-                                        <a href="single.html">
-                                            <img src="images/g1.jpg" class="img-fluid" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-8 blog-grid-right">
 
-                                        <h5>
-										<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-									</h5>
-                                        <div class="sub-meta">
-                                            <span>
-											<i class="far fa-clock"></i> 20 Apr, 2018</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="blog-grids row mb-3">
-                                    <div class="col-md-4 pr-0 blog-grid-left">
-                                        <a href="single.html">
-                                            <img src="images/g4.jpg" class="img-fluid" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-8 blog-grid-right">
-
-                                        <h5>
-										<a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
-									</h5>
-                                        <div class="sub-meta">
-                                            <span>
-											<i class="far fa-clock"></i> 23 Apr, 2018</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- subscribe -->
-                        <!-- <div class="col-lg-3 subscribe-main-w3ls-agileits footer-grid text-left">
-                            <h3 class="mb-4">Newsletter</h3>
-                            <div class="subscribe-main-w3ls-agileits text-left">
-                                <div class="subscribe-form">
-                                    <form action="#" method="post" class="subscribe_form">
-                                        <input class="form-control" type="email" placeholder="Enter Your Email..." required="">
-                                        <button type="submit" class="btn1 btn-primary submit">
-                                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
-                                </div> -->
                             </div>
                             <!-- //subscribe -->
                             <div class="footer-social mt-4">
