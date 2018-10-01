@@ -1010,25 +1010,22 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                             <h3 class="mb-4">Locate Us</h3>
                             <ul class="footer-bottom-list">
                                 <li>
-                                    <span class="fas fa-map-marker-alt"></span> 3481 Honey Street
-                                    <span> 90990 Block, USA </span>
+                                    <span class="fas fa-map-marker-alt"></span> Room no.330
+                                    <span> L-block VIT University </span>
                                 </li>
                                 <li>
                                     <span class="fas fa-envelope"></span>
-                                    <a href="mailto:name@example.com"> mail@example.com</a>
+                                    <a href=""> akshattongia48@gmail.com</a>
                                 </li>
                                 <li>
-                                    <span class="fas fa-phone"></span> +143 367 436 2049 </li>
+                                    <span class="fas fa-phone"></span> +91 790726  </li>
                                 <li>
-                                    <span class="fas fa-fax"></span> +166 367 808 5055 </li>
-                                <li>
-                                    <span class="fas fa-globe"></span>
-                                    <a href="#"> www.websitename.com</a>
-                                </li>
+                                    <span class="fas fa-fax"></span> +91 8808579891 </li>
+
 
                             </ul>
                         </div>
-                        <div class="col-lg-3 footer-grid text-left">
+                        <!-- <div class="col-lg-3 footer-grid text-left">
                             <div class="tech-btm">
                                 <h3 class="mb-4">Latest Photos</h3>
                                 <div class="blog-grids row mb-3">
@@ -1069,9 +1066,9 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- subscribe -->
-                        <div class="col-lg-3 subscribe-main-w3ls-agileits footer-grid text-left">
+                        <!-- <div class="col-lg-3 subscribe-main-w3ls-agileits footer-grid text-left">
                             <h3 class="mb-4">Newsletter</h3>
                             <div class="subscribe-main-w3ls-agileits text-left">
                                 <div class="subscribe-form">
@@ -1081,7 +1078,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                                             <i class="fas fa-paper-plane" aria-hidden="true"></i>
                                         </button>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- //subscribe -->
                             <div class="footer-social mt-4">
