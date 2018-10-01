@@ -1,0 +1,80 @@
+html,body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%
+}
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 120%;
+  background-image: url("../images/banner2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.header {
+  width: 30%;
+  margin: 50px auto 0px;
+  color: white;
+  /*background: #000000;*/
+  text-align: center;
+  /*border: 1px solid #B0C4DE;*/
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
+  letter-spacing: 10px;
+}
+.input-group {
+  margin: 10px 0px 10px 0px;
+}
+.input-group label {
+  display: block;
+  text-align: left;
+  margin: 3px;
+}
+.input-group input {
+  height: 30px;
+  width: 93%;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: inherit;
+}
+
+.input-group input:hover{
+  background-color: rgba(10,10,10,0.2);
+
+}
+.btn {
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  background: black;
+  border: none;
+  border-radius: 5px;
+}
+.error {
+  width: 92%; 
+  margin: 2px auto; 
+  padding: 10px; 
+  border: 1px solid white; 
+  color: white; 
+  background: red; 
+  border-radius: 5px; 
+  text-align: left;
+}
+
+.xyz a:visited{
+  color: red;
+}
+
+.xyz a:hover{
+  color: green;
+}
+
+.xyz a:link{
+  color: white;
+}
+
