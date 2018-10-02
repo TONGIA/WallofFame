@@ -92,6 +92,11 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                 margin: 10px;
                 font-size: 18px;
                 cursor: pointer;
+                position:absolute;
+                right:145px;
+
+
+
             }
 
             .btn1 {
@@ -103,6 +108,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                 cursor: pointer;
                 border: 0px;
                 border-radius: 5%;
+                position:absolute;
+                right:15px;
             }
 
             .login {
@@ -132,6 +139,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                 }
                 .banner-sec-w3layouts {
                     background-attachment: initial;
+                    position: relative;
                 }
                 .btn1 {
                     width: 100%;
@@ -229,6 +237,11 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
                         </ul>
                     </div>
+
+
+
+
+
 
                 </nav>
             </header>
