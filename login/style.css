@@ -17,9 +17,9 @@ body {
   width: 30%;
   margin: 50px auto 0px;
   color: white;
-  /*background: #000000;*/
+  font-family: gentona;
   text-align: center;
-  /*border: 1px solid #B0C4DE;*/
+  font-size: 25px;
   border-bottom: none;
   border-radius: 10px 10px 0px 0px;
   padding: 20px;
@@ -32,6 +32,7 @@ body {
   display: block;
   text-align: left;
   margin: 3px;
+  color: white;
 }
 .input-group input {
   height: 30px;
@@ -39,7 +40,8 @@ body {
   padding: 5px 10px;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-color: white;
   background-color: inherit;
 }
 
@@ -53,8 +55,10 @@ body {
   color: white;
   background: black;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  cursor: pointer;
 }
+
 .error {
   width: 92%; 
   margin: 2px auto; 

@@ -13,13 +13,11 @@ form, .content {
   width: 30%;
   margin: 0px auto;
   
-  
-  
-}
+  }
 
 .logo-image{
-  width: 10%;
-  padding: 0px 4px;
+  width: 7%;
+  padding: 0px 10px;
   text-align: center;
 }
 
@@ -43,7 +41,7 @@ form, .content {
   </div>
 	
   <form method="post" action="register.php" style="margin-top: -50px;">
-  	<?php include('errors.php'); ?>
+  	
   	<div class="input-group">
   	  <label>Username</label>
   	  <input type="text" name="name">
@@ -68,12 +66,14 @@ form, .content {
   	  <label>Confirm password</label>
   	  <input type="password" name="password_2">
   	</div>
+    <?php include('errors.php'); ?>
   	<div class="input-group">
   	  <button type="submit" class="btn" name="reg_user">Register</button>
   	</div>
-  	<p>
-  		Already a member? <a href="login.php">Sign in</a>
-  	</p>
-  </form>
+    <p style="color: white">Already a member?<br></p>
+    <p class="xyz">
+       <a href="login.php">Sign in</a>
+    </p>
+  	</form>
 </body>
 </html>

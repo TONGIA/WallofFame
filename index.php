@@ -2,9 +2,18 @@
 <html lang="eng">
 <?php
 $db = mysqli_connect('localhost', 'root', '', 'registration');
+$currentImage;$x;$y;
+session_start();
+if(!isset($_SESSION['cartArray'])){
+	// echo "<br>here<br>";
+	$_SESSION['cartArray'] = array();
+}
+// else{
+// 	echo "<br>here3<br>";
+// }
 ?>
-
     <head>
+    	<title>Wall of Fame</title>
 
         <script>
             function initMap() {
@@ -88,12 +97,14 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
             .btn {
                 background-color: black;
                 color: black;
-                padding: 14px 28px;
-                margin: 10px;
+                padding: 10px 20px;
+                margin-left: 30px;
+                margin-top: 10px;
                 font-size: 18px;
                 cursor: pointer;
                 position:absolute;
-                right:145px;
+                right:150px;
+                border-radius: 8px;
 
 
 
@@ -102,12 +113,12 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
             .btn1 {
                 background-color: black;
                 color: black;
-                padding: 14px 28px;
+                padding: 10px 20px;
                 margin: 10px;
                 font-size: 18px;
                 cursor: pointer;
                 border: 0px;
-                border-radius: 5%;
+                border-radius: 8px;
                 position:absolute;
                 right:15px;
             }
@@ -126,6 +137,11 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                 padding: 0px 2px;
                 text-align: center;
             }
+            .tight{
+                width: 5%;
+                padding-left: 0px;
+            }
+
 
             @media screen and (max-width: 420px) {
                 .logo-image {
@@ -146,6 +162,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                     margin-left: 0px;
                 }
             }
+
+
         </style>
 
         <style type="text/css">
@@ -173,7 +191,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
     <body>
  		<!-- <div id="loading"></div>   	 -->
- 		<div id = "myDiv"><img id = "myImage" src = "images/wall1.gif"></div>
+ 		<!-- <div id = "myDiv"><img id = "myImage" src = "images/wall1.gif"></div> -->
         <section class="banner-sec-w3layouts" id="home">
 
             <header style="padding: 0px 8px;">
@@ -188,7 +206,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 					</span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ">
+                        <ul class="navbar-nav">
                             <li class="nav-item active">
                                 <a class="nav-link ml-lg-0" href="index.php">Home
 								<span class="sr-only">(current)</span>
@@ -206,18 +224,9 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                             <li class="nav-item">
                                 <a class="nav-link scroll" href="#about">ABOUT</a>
                             </li>
-                            <?php
-					error_reporting(0);
-					session_start();
 
-					if(isset($_SESSION['name']))
-					{
-						echo('<li class="nav-item">
-							<a class="nav-link scroll" href="cart.php">CART</a>
-						</li>');
-					}
-					?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+
+
 
                                 <?php
 					error_reporting(0);
@@ -234,6 +243,17 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 					}
 						// session_destroy();
 					?>
+                     <?php
+                    error_reporting(0);
+                    session_start();
+
+                    if(isset($_SESSION['name']))
+                    {
+                        echo('
+                             <form method="post" action="cart.php" class="tight"><button class="cursor" style="width:90%;height:auto;margin-top:10px; background-color:#868686;border:0px;" type="submit" name="cart" ><img src="images/cart1.png"/></button></form>
+                       ');
+                    }
+                    ?>
 
                         </ul>
                     </div>
@@ -321,7 +341,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="cart.php"><a href="cart.php"><img src="images/cart.png" style="width:7%;height:7%; float:right; margin-bottom:5px;"></a> </form>');
+						echo ('<form  method="post" action="cart.php"><button class="cursor" style="width:10%;height:10%; float:right; margin-bottom:15px;background-color:inherit; border:0px;" type="submit" name="cart" ><img src="images/cart2.png"/></button></form>');
 					}
 					else{
 						echo ('<a href="login/login.php" style="color:white;font-size:30px; text-align:right;">You need to login first.</a>
@@ -339,7 +359,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
                             			<div class="mySlides">
-		                                <img src="images/movies/<?php echo $row['name']?>" style="width:100%">
+                                            <?php $current_image = $row['name'];?>
+		                                <img src="images/movies/<?php echo $current_image?>" style="width:100%"  class="rare">
 		                                </div>
 
                             <?php
@@ -355,8 +376,11 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="add_to_cart.php"><input type="text" name="selected_product" value="<?php echo $current_image;
-							" hidden><button class="btn" type="button" name="add" style="color:white;text-align:center;">Add to Cart</button></form>');
+						//echo $current_image;die;
+						echo ('<form method="post" action="add_to_cart.php">
+							<input type="text" name="selected_product" value="'.$current_image.'" id="selected_product" hidden>
+							<input type="text" name="selected_div" value=1 id="selected_div" hidden>
+							<input class="btn btn-secondary mt-4 mb-4 d-sm-flex" type="submit" name="add" value="Add to Cart" style="color:white;text-align:center;position:relative;left:240px"></form>');
 					}
 					else{
 						echo (' ') ;
@@ -382,8 +406,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 									{
 										//echo $row['image'];die;
 										?>
-										<div class="col-sm-4">
-                                            <img class="demo cursor img-responsive" src="images/movies/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)" alt="Nature and sunrise">
+										<div id="pic" class="col-sm-4">
+                                            <img class="demo cursor img-responsive" src="images/movies/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>);">
                                         </div>
 
 
@@ -403,7 +427,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
             <!-- MODAL 2 -->
 
 
-            <div id="myModal2" class="modal">
+           <div id="myModal2" class="modal">
                 <span class="close cursor" onclick="closeModal(2)">&times;</span>
                 <div class="modal-content">
 
@@ -413,7 +437,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="cart.php"><a href="cart.php"><img src="images/cart.png" style="width:7%;height:7%; float:right; margin-bottom:5px;"></a> </form>');
+						echo ('<form method="post" action="cart.php"><button class="cursor" style="width:10%;height:10%; float:right; margin-bottom:15px;background-color:inherit; border:0px;" type="submit" name="cart" ><img src="images/cart2.png"/></button></form>');
 					}
 					else{
 						echo ('<a href="login/login.php" style="color:white;font-size:30px; text-align:right;">You need to login first.</a>
@@ -431,7 +455,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
                             			<div class="mySlides">
-		                                <img src="images/music/<?php echo $row['name']?>" style="width:100%">
+                                            <?php $current_image = $row['name'];?>
+		                                <img src="images/music/<?php echo $current_image?>" style="width:100%"  class="rare">
 		                                </div>
 
                             <?php
@@ -447,9 +472,12 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="add_to_cart.php"><input type="text" name="selected_product" value="<?php echo $current_image;
-							" hidden><button class="btn" type="button" name="add" style="color:white;text-align:center;">Add to Cart</button></form>');
-					}
+						//echo $current_image;die;
+						echo ('<form method="post" action="add_to_cart.php">
+                            <input type="text" name="selected_product" value="'.$current_image.'" id="selected_product" hidden>
+                            <input type="text" name="selected_div" value=2 id="selected_div" hidden>
+                            <input class="btn btn-secondary mt-4 mb-4" type="submit" name="add" value="Add to Cart" style="color:white;text-align:center;position:relative;left:240px"></form>');
+                    }
 					else{
 						echo (' ') ;
 					}
@@ -475,7 +503,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
 										<div class="col-sm-4">
-                                            <img class="demo cursor img-responsive" src="images/music/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)" alt="Nature and sunrise">
+                                            <img class="demo cursor img-responsive" src="images/music/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)">
                                         </div>
 
 
@@ -504,7 +532,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="cart.php"><a href="cart.php"><img src="images/cart.png" style="width:7%;height:7%; float:right; margin-bottom:5px;"></a> </form>');
+						echo ('<form method="post" action="cart.php"><button class="cursor" style="width:10%;height:10%; float:right; margin-bottom:15px;background-color:inherit; border:0px;" type="submit" name="cart" ><img src="images/cart2.png"/></button></form>');
 					}
 					else{
 						echo ('<a href="login/login.php" style="color:white;font-size:30px; text-align:right;">You need to login first.</a>
@@ -522,7 +550,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
                             			<div class="mySlides">
-		                                <img src="images/tv/<?php echo $row['name']?>" style="width:100%">
+                                            <?php $current_image = $row['name'];?>
+		                                <img src="images/tv/<?php echo $current_image?>" style="width:100%"  class="rare">
 		                                </div>
 
                             <?php
@@ -538,9 +567,12 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="add_to_cart.php"><input type="text" name="selected_product" value="<?php echo $current_image;
-							" hidden><button class="btn" type="button" name="add" style="color:white;text-align:center;">Add to Cart</button></form>');
-					}
+						//echo $current_image;die;
+						echo ('<form method="post" action="add_to_cart.php">
+                            <input type="text" name="selected_product" value="'.$current_image.'" id="selected_product" hidden>
+                            <input type="text" name="selected_div" value=3 id="selected_div" hidden>
+                            <input class="btn btn-secondary mt-4 mb-4" type="submit" name="add" value="Add to Cart" style="color:white;text-align:center;position:relative;left:240px"></form>');
+                    }
 					else{
 						echo (' ') ;
 					}
@@ -566,7 +598,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
 										<div class="col-sm-4">
-                                            <img class="demo cursor img-responsive" src="images/tv/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)" alt="Nature and sunrise">
+                                            <img class="demo cursor img-responsive" src="images/tv/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)">
                                         </div>
 
 
@@ -582,7 +614,6 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
                 </div>
             </div>
-
             <!-- MODAL 4 -->
 
 
@@ -596,7 +627,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="cart.php"><a href="cart.php"><img src="images/cart.png" style="width:7%;height:7%; float:right; margin-bottom:5px;"></a> </form>');
+						echo ('<form method="post" action="cart.php"><button class="cursor" style="width:10%;height:10%; float:right; margin-bottom:15px;background-color:inherit; border:0px;" type="submit" name="cart" ><img src="images/cart2.png"/></button></form>');
 					}
 					else{
 						echo ('<a href="login/login.php" style="color:white;font-size:30px; text-align:right;">You need to login first.</a>
@@ -614,7 +645,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
                             			<div class="mySlides">
-		                                <img src="images/sports/<?php echo $row['name']?>" style="width:100%">
+                                            <?php $current_image = $row['name'];?>
+		                                <img src="images/sports/<?php echo $current_image?>" style="width:100%"  class="rare">
 		                                </div>
 
                             <?php
@@ -630,9 +662,12 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="add_to_cart.php"><input type="text" name="selected_product" value="<?php echo $current_image;
-							" hidden><button class="btn" type="button" name="add" style="color:white;text-align:center;">Add to Cart</button></form>');
-					}
+						//echo $current_image;die;
+						echo ('<form method="post" action="add_to_cart.php">
+                            <input type="text" name="selected_product" value="'.$current_image.'" id="selected_product" hidden>
+                            <input type="text" name="selected_div" value=4 id="selected_div" hidden>
+                            <input class="btn btn-secondary mt-4 mb-4" type="submit" name="add" value="Add to Cart" style="color:white;text-align:center;position:relative;left:240px"></form>');
+                    }
 					else{
 						echo (' ') ;
 					}
@@ -658,7 +693,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
 										<div class="col-sm-4">
-                                            <img class="demo cursor img-responsive" src="images/sports/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)" alt="Nature and sunrise">
+                                            <img class="demo cursor img-responsive" src="images/sports/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)">
                                         </div>
 
 
@@ -688,7 +723,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="cart.php"><a href="cart.php"><img src="images/cart.png" style="width:7%;height:7%; float:right; margin-bottom:5px;"></a> </form>');
+						echo ('<form method="post" action="cart.php"><button class="cursor" style="width:10%;height:10%; float:right; margin-bottom:15px;background-color:inherit; border:0px;" type="submit" name="cart" ><img src="images/cart2.png"/></button></form>');
 					}
 					else{
 						echo ('<a href="login/login.php" style="color:white;font-size:30px; text-align:right;">You need to login first.</a>
@@ -706,7 +741,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
                             			<div class="mySlides">
-		                                <img src="images/motivational/<?php echo $row['name']?>" style="width:100%">
+                                            <?php $current_image = $row['name'];?>
+		                                <img src="images/motivational/<?php echo $current_image?>" style="width:100%"  class="rare">
 		                                </div>
 
                             <?php
@@ -722,9 +758,12 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="add_to_cart.php"><input type="text" name="selected_product" value="<?php echo $current_image;
-							" hidden><button class="btn" type="button" name="add" style="color:white;text-align:center;">Add to Cart</button></form>');
-					}
+						//echo $current_image;die;
+						echo ('<form method="post" action="add_to_cart.php">
+                            <input type="text" name="selected_product" value="'.$current_image.'" id="selected_product" hidden>
+                            <input type="text" name="selected_div" value=5 id="selected_div" hidden>
+                            <input class="btn btn-secondary mt-4 mb-4" type="submit" name="add" value="Add to Cart" style="color:white;text-align:center;position:relative;left:240px"></form>');
+                    }
 					else{
 						echo (' ') ;
 					}
@@ -750,7 +789,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
 										<div class="col-sm-4">
-                                            <img class="demo cursor img-responsive" src="images/motivational/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)" alt="Nature and sunrise">
+                                            <img class="demo cursor img-responsive" src="images/motivational/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)">
                                         </div>
 
 
@@ -770,7 +809,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
             <!-- MODAL 6 -->
 
 
-            <div id="myModal6" class="modal">
+           <div id="myModal6" class="modal">
                 <span class="close cursor" onclick="closeModal(6)">&times;</span>
                 <div class="modal-content">
 
@@ -780,7 +819,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="cart.php"><a href="cart.php"><img src="images/cart.png" style="width:7%;height:7%; float:right; margin-bottom:5px;"></a> </form>');
+						echo ('<form method="post" action="cart.php"><button class="cursor" style="width:10%;height:10%; float:right; margin-bottom:15px;background-color:inherit; border:0px;" type="submit" name="cart" ><img src="images/cart2.png"/></button></form>');
 					}
 					else{
 						echo ('<a href="login/login.php" style="color:white;font-size:30px; text-align:right;">You need to login first.</a>
@@ -798,7 +837,8 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
                             			<div class="mySlides">
-		                                <img src="images/celebrities/<?php echo $row['name']?>" style="width:100%">
+                                            <?php $current_image = $row['name'];?>
+		                                <img src="images/celebrities/<?php echo $current_image?>" style="width:100%"  class="rare">
 		                                </div>
 
                             <?php
@@ -814,9 +854,12 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
 					if(isset($_SESSION['name']))
 					{
-						echo ('<form method="post" action="add_to_cart.php"><input type="text" name="selected_product" value="<?php echo $current_image;
-							" hidden><button class="btn" type="button" name="add" style="color:white;text-align:center;">Add to Cart</button></form>');
-					}
+						//echo $current_image;die;
+						echo ('<form method="post" action="add_to_cart.php">
+                            <input type="text" name="selected_product" value="'.$current_image.'" id="selected_product" hidden>
+                            <input type="text" name="selected_div" value=6 id="selected_div" hidden>
+                            <input class="btn btn-secondary mt-4 mb-4" type="submit" name="add" value="Add to Cart" style="color:white;text-align:center;position:relative;left:240px"></form>');
+                    }
 					else{
 						echo (' ') ;
 					}
@@ -842,7 +885,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 										//echo $row['image'];die;
 										?>
 										<div class="col-sm-4">
-                                            <img class="demo cursor img-responsive" src="images/celebrities/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)" alt="Nature and sunrise">
+                                            <img class="demo cursor img-responsive" src="images/celebrities/<?php echo $row['name']?>" style="width:100%" onclick="currentSlide(<?php echo $count;?>)">
                                         </div>
 
 
@@ -858,9 +901,16 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
 
                 </div>
             </div>
+            <script src="js/deparam.js"></script>
 
             <script>
                 var dd = "#myModal1";
+                var url_string = window.location.href;
+                var url = new URL(url_string);
+                var c = 0;
+                c = url.searchParams.get("isTrue");
+                if(c>0)
+                openModal(c);
 
                 function openModal(b) {
                     console.log('myModal' + b);
@@ -879,14 +929,23 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                     showSlides(slideIndex += n, dd);
                 }
 
+                function trial(x){
+                	alert(x);
+                }
+
                 function currentSlide(n) {
+                	//alert(x);
                     showSlides(slideIndex = n, dd);
+
+                    // var t = document.querySelector();
                 }
 
                 function showSlides(n, dd) {
                     var i;
+                    //alert(dd);
                     var slides = document.querySelectorAll(dd + " .mySlides");
-                    console.log(slides);
+                    // console.log(slides);
+
                     var dots = document.querySelectorAll(dd + " .demo");
                     var captionText = document.querySelectorAll(dd + " .caption");
                     if (n > slides.length) {
@@ -897,13 +956,23 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                     }
                     for (i = 0; i < slides.length; i++) {
                         slides[i].style.display = "none";
-                    }
+                    }currentSlide
                     for (i = 0; i < dots.length; i++) {
                         dots[i].className = dots[i].className.replace(" active", "");
                     }
                     slides[slideIndex - 1].style.display = "block";
+                    var hasnain = dots[slideIndex - 1].className;
+                    console.log(dd);
                     dots[slideIndex - 1].className += " active";
+                    var eureka = dots[slideIndex - 1].getAttribute("src");
+                    var finEureka = eureka.substring(eureka.lastIndexOf("/")+1);
+                    console.log(finEureka);
+                    document.querySelector(dd+" #selected_product").value = finEureka;
+                    // console.log(dots[slideIndex - 1].getAttribute("src").lastIndexOf("/"));
                     captionText.innerHTML = dots[slideIndex - 1].alt;
+                    var hell = dd+" .rare";
+                    var myVar = document.querySelector(hell);
+                    console.log(myVar);
                 }
             </script>
 
@@ -922,7 +991,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                         <div class="col-lg-10 card-desk text-center">
                             <div class="row prime">
                                 <div class="col-md-4 price-main-info card box-shadow">
-                                    <div class="card-header" style="background-image: url(images/movies/m8.jpg);">
+                                    <div id="pic" class="card-header" style="background-image: url(images/movies/m8.jpg);">
 
                                     </div>
                                     <div class="card-body">
@@ -984,18 +1053,18 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                                 <form action="contact.php" method="post">
                                     <div class="form-group">
                                         <label class="my-2">Name</label>
-                                        <input class="form-control" type="text" name="Name" placeholder="" required="" style="background-color: #262626; color: white; font-size: 20px;">
+                                        <input class="form-control" type="text" name="Name" placeholder="" required="" style="background-color: #262626; color: white; font-size: 20px; border-radius: 4px;border-color: grey;">
                                     </div>
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input class="form-control" type="email" name="Email" placeholder="" required="" style="background-color: #262626; color: white; font-size: 20px;">
+                                        <input class="form-control" type="email" name="Email" placeholder="" required="" style="background-color: #262626; color: white; font-size: 20px;border-radius: 4px;">
                                     </div>
                                     <div class="form-group">
                                         <label>Message</label>
-                                        <textarea id="textarea" name="message" placeholder="" style="background-color: #262626; color: white; font-size: 20px;"></textarea>
+                                        <textarea id="textarea" name="message" placeholder="" style="background-color: #262626; color: white; font-size: 20px;border-radius: 4px;"></textarea>
                                     </div>
                                     <div class="input-group1">
-                                        <input class="form-control" type="submit" value="Submit">
+                                        <input class="form-control" type="submit" value="Submit" style="border-radius: 4px;">
                                     </div>
                                 </form>
 
@@ -1017,7 +1086,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                         <div class="col-lg-3 footer-grid1-wthree-agileits text-left">
                             <h3 class="mb-4">About Us</h3>
                             <p>Bunch of engineers trying to do something productive! </p>
-                            <a href="#contact" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm animated-button gibson-three mt-3">GetInTouch</a>
+                            <!-- <a href="#contact" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm animated-button gibson-three mt-3">GetInTouch</a> -->
                         </div>
                         <div class="col-lg-3 footer-grid1-wthree-agileits text-left">
                             <h3 class="mb-4">Locate Us</h3>
@@ -1033,7 +1102,7 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
                                 <li>
                                     <span class="fas fa-phone"></span> +91 8209790726  </li>
                                 <li>
-                                    <span class="fas fa-fax"></span> +91 8808579891 </li>
+                                    <span class="fas fa-phone"></span> +91 8423234396 </li>
 
 
                             </ul>
@@ -1176,6 +1245,27 @@ $db = mysqli_connect('localhost', 'root', '', 'registration');
         <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
         <script src="js/bootstrap.js"></script>
+        <script> $('a[href^="#"]').click(function(){
+
+var the_id = $(this).attr("href");
+
+    $('html, body').animate({
+        scrollTop:$(the_id).offset().top
+    }, 700);
+
+return false;});
+</script>
+
+<script >
+    $(document).ready(function() {
+    $("#pic").click(function(event) {
+        event.preventDefault();
+        $("#pic").animate({ scrollTop: 0 }, "slow");
+        return false;
+    });
+
+});
+</script>
 
     </body>
 

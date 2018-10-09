@@ -4,7 +4,7 @@
 <head>
   <title>Login</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  
+  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
   <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 </head>
 
@@ -18,8 +18,8 @@ form, .content {
 }
 
 .logo-image{
-  width: 10%;
-  padding: 0px 4px;
+  width: 7%;
+  padding: 0px 10px;
   text-align: center;
 }
 
@@ -44,7 +44,7 @@ form, .content {
   	<h1 style="letter-spacing: 10px;">LOGIN</h1>
   </div>
   <form method="post" action="login.php" >
-  	<?php include('errors.php'); ?>
+  	
   	<div class="input-group">
   		<label>Username</label>
   		<input type="text" name="name" >
@@ -53,11 +53,14 @@ form, .content {
   		<label>Password</label>
   		<input type="password" name="password">
   	</div>
+    <?php include('errors.php'); ?>
   	<div class="input-group">
-  		<button type="submit" class="btn" name="login_user">Login</button>
+  		<button type="submit" class="btn cursor" name="login_user">Login</button>
   	</div>
+    <p style="color: white">Not yet a member?<br></p>
   	<p class="xyz">
-  		Not yet a member?<br> <a href="register.php">Sign up</a>
+
+  		 <a href="register.php">Sign up</a>
   	</p>
   </form>
 </body>
